@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automação SESAP - Processamento de Documentos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <h1>Automação SESAP</h1>
+            <p>Faça o upload do seu documento PDF. Nós faremos a extração de dados e preencheremos sua planilha automaticamente.</p>
+        </header>
+
+        <div class="upload-card">
+            <div id="drop-zone" class="drop-zone">
+                <div class="drop-zone-content">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p class="drop-zone-text">Arraste e solte o PDF aqui ou <span>clique para selecionar</span></p>
+                    <p class="drop-zone-subtext">Apenas arquivos .pdf</p>
+                </div>
+                <input type="file" id="file-input" accept=".pdf" hidden>
+            </div>
+
+            <div id="upload-progress" class="progress-container hidden">
+                <div class="progress-info">
+                    <span id="filename">arquivo.pdf</span>
+                    <span id="status-text">Processando...</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <button id="submit-btn" class="submit-btn" disabled>Processar Documento</button>
+        </div>
+
+        <div id="result-card" class="result-card hidden">
+            <div class="result-header">
+                <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h2>Processamento Concluído!</h2>
+            </div>
+            <p>Os seguintes dados foram extraídos e enviados para a planilha:</p>
+            <ul id="extracted-data-list" class="extracted-list">
+                <!-- Populado via JS -->
+            </ul>
+            <button id="reset-btn" class="secondary-btn">Processar novo documento</button>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
